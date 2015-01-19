@@ -27,4 +27,22 @@ public class PersonRepositoryTest extends AbstractJpaTest {
         assertThat(savedPerson.getId()).isEqualTo(johnDoe.getId());
     }
 
+    @Test
+    public void friendship_whenEstablished_isPersistedCorrectly() {
+        PersonRepository repository = new PersonJpaRepository(entityManager());
+        Person johnDoe = new Person("John", "Doe");
+        repository.save(johnDoe);
+
+        Person olaNordmann = new Person("Ola", "Nordmann");
+        olaNordmann.addFriend(johnDoe);
+        repository.save(olaNordmann);
+
+        repository.clearCache();
+        Person savedOla = repository.personByName("Ola", "Nordmann");
+        assertThat(savedOla.getFriendships().size()).isEqualTo(1);
+        Friendship olasFriendship = savedOla.getFriendships().iterator().next();
+        assertThat(olasFriendship.getPerson1().getId()).isEqualTo(olaNordmann.getId());
+        assertThat(olasFriendship.getPerson2().getId()).isEqualTo(johnDoe.getId());
+    }
+
 }

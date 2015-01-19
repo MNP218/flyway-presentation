@@ -3,7 +3,7 @@ CREATE SEQUENCE friendshipSeq;
 
 CREATE TABLE person
 (
-  personId  BIGINT DEFAULT personSeq.nextval PRIMARY KEY,
+  id        BIGINT DEFAULT personSeq.nextval PRIMARY KEY,
   firstName VARCHAR,
   lastName  VARCHAR,
   gender    VARCHAR
@@ -11,9 +11,9 @@ CREATE TABLE person
 
 CREATE TABLE friendship
 (
-  friendship_id   BIGINT DEFAULT friendshipSeq.nextval PRIMARY KEY,
-  person1         INT,
-  person2         INT,
+  id              BIGINT DEFAULT friendshipSeq.nextval PRIMARY KEY,
+  person1_id         BIGINT NOT NULL,
+  person2_id         BIGINT NOT NULL,
   dateEstablished DATETIME
 );
 

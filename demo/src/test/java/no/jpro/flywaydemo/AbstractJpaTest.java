@@ -1,5 +1,7 @@
 package no.jpro.flywaydemo;
 
+import org.flywaydb.core.Flyway;
+import org.flywaydb.core.internal.util.jdbc.DriverDataSource;
 import org.junit.After;
 import org.junit.Before;
 
@@ -13,7 +15,8 @@ public class AbstractJpaTest {
 
     private EntityManagerFactory entityManagerFactory() {
         if (entityManagerFactory == null) {
-            entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo");
+            initFlyway();
+            entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo.test");
         }
         return entityManagerFactory;
     }
@@ -23,6 +26,17 @@ public class AbstractJpaTest {
             entityManager = entityManagerFactory().createEntityManager();
         }
         return entityManager;
+    }
+
+    private void initFlyway() {
+        Flyway flyway = new Flyway();
+        flyway.setDataSource(createDataSource());
+        flyway.clean();
+        flyway.migrate();
+    }
+
+    private DriverDataSource createDataSource() {
+        return new DriverDataSource(getClass().getClassLoader(), "org.h2.Driver", "jdbc:h2:~/h2demodb-inmem", "jpro", "jpro");
     }
 
     @Before

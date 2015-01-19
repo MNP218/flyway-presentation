@@ -27,4 +27,10 @@ public class PersonJpaRepository implements PersonRepository {
         query.setParameter("lastName", lastName);
         return query.getSingleResult();
     }
+
+    @Override
+    public void clearCache() {
+        entityManager.flush();
+        entityManager.clear();
+    }
 }
