@@ -6,8 +6,7 @@ CREATE TABLE person
   id         BIGINT DEFAULT personSeq.nextval PRIMARY KEY,
   company_id BIGINT,
   firstName  VARCHAR,
-  lastName   VARCHAR,
-  gender     VARCHAR
+  lastName VARCHAR
 );
 
 CREATE TABLE company
