@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -48,13 +48,14 @@
 					<p>
 						<small>Av Frode Rystad / <a href="http://twitter.com/froderystad">@froderystad</a></small>
 					</p>
+					<img class="" src="http://flywaydb.org/assets/logo/flyway-logo-tm-sm.png"/>
 				</section>
 				<section>
 					<section>
 						<h3>Hva er databasemigreringer?</h3>
 					</section>
 					<section>
-						<h3>Kildekodekontroll - DET har vi!</h3>
+						<h3>Kontroll på kildekoden - DET har vi!</h3>
 						<ul>
 							<li>Git forteller oss nøyaktig hvilke endringer som er hvor.</li>
 							<li>Maven og Nexus gir oss reproduserbare bygg.</li>
@@ -65,7 +66,7 @@
 						<p>
 						<ul>
 							<li>Hvilken tilstand er databasen i på <em>denne</em> maskinen?</li>
-							<li>Har skriptet allerede blitt kjørt, eller ikke?</li>
+							<li>Har et skript allerede blitt kjørt, eller ikke?</li>
 							<li>Har quick-fiksen vi gjorde i produksjon blitt kjørt inn i testmiljøet?</li>
 							<li>Hvordan setter vi opp en ny database-instans?</li>
 						</ul>
@@ -75,32 +76,81 @@
 					<section>
 						<h3>Databasemigreringer <em>to the rescue</em></h3>
 						<ul>
-							<li>Lett å opprette database fra <em>scratch</em></li>
-							<li>Gir kontroll på databaseskjemaets tilstand</li>
+							<li>Versjoneres med kildekoden</li>
+							<li>Får kontroll på databaseskjemaets tilstand</li>
 							<li>Deterministisk migrering fra én databasetilstand til neste</li>
+							<li>Lett å opprette database <em>fra scratch</em></li>
 						</ul>
+						<aside class="notes">
+							Det er vanlig med én kildefil per migrering, og checksum-kontroll
+							på om en migrering er endret.
+						</aside>
 					</section>
 				</section>
 				<section>
 					<section>
 						<h3>Hvorfor Flyway?</h3>
+						<ul>
+							<li>Enkelt verktøy, som gjør sine ting bra.</li>
+							<li>Kan brukes fra kommandolinje, Java-API, Maven, m.m.</li>
+							<li>Migreringer er ren SQL, eller Java-kode.</li>
+							<li>Det virket første gang, og har fortsatt å virke siden.</li>
+						</ul>
+						<p><a href="http://flywaydb.org">flywaydb.org</a></p>
+						<aside class="notes">
+							Vi bruker bare PostgreSQL, så støtte for én databasedialekt var tilstrekkelig.
+						</aside>
 					</section>
 					<section>
 						<h3>Hva er alternativet?</h3>
-						<p><strong>Liquibase</strong></p>
+						<p><strong><p><a href="http://www.liquibase.org">Liquibase</a></p></strong></p>
 						<ul>
-							<li>Metaspråk gir støtte for flere databaser</li>
+							<li>Støtte for flere databaser fra samme definisjon</li>
+							<li>Støtter XML, YAML, JSON og SQL som definisjonsspråk</li>
+							<li>Kan generere <em>diff</em> som SQL</li>
+							<li>Kan generere dokumentasjon</li>
+							<li>Støtte for forskjellige grunndatasett i f.eks. test og prod</li>
 						</ul>
 						<aside class="notes">
-							Støtter kun ett databaseskjema.
+							<p>SQL-diff kan være nyttig der driftsorganisasjoner ikke vil kjøre Liquibase, men et skript e.l.</p>
+							<p>Liquibase
+								<ul>
+									<li>Støtter kun ett databaseskjema, og vi hadde <em>to</em>.</li>
+									<li>Problematisk med våre eksisterende skjemas <em>funksjoner</em>.</li>
+									<li>Brukes hos Skatteetaten</li>
+								</ul>
+							</p>
 						</aside>
 					</section>
 				</section>
 				<section>
-					<h1>Demo</h1>
-					<p>Test-drevet databaseutvikling med JPA og Flyway.</p>
+					<h3>Anbefalte praksiser for FLYWAY</h3>
+					<ul>
+						<li>Aldri endre på en pushet migrering</li>
+						<li>Én kildekodefil per funksjon per revisjon</li>
+						<li>Bruk tidsstempel som versjonsnummer - det fungerer best i større team, og over flere branches.</li>
+						<li>Versjoner grunndata sammen med databaseskjemaet.</li>
+					</ul>
 				</section>
-
+				<section>
+					<section>
+						<h1>Demo</h1>
+						<p>Test-drevet databaseutvikling med JPA og Flyway.</p>
+					</section>
+					<section>
+						<h3>Funksjonalitet</h3>
+						<p>Enkel domenemodell: Company - Person(s)</p>
+					</section>
+					<section>
+						<h3>Teknisk</h3>
+						<ul>
+							<li>Hibernate som JPA-provider</li>
+							<li><a href="http://www.h2database.com">H2</a> som database</li>
+							<li>Bygger i Maven</li>
+							<li>Kjører i Java</li>
+						</ul>
+					</section>
+				</section>
 			</div>
 
 		</div>
