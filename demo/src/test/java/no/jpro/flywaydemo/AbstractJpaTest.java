@@ -36,7 +36,13 @@ public class AbstractJpaTest {
     }
 
     private DriverDataSource createDataSource() {
-        return new DriverDataSource(getClass().getClassLoader(), "org.h2.Driver", "jdbc:h2:~/h2demodb-inmem", "jpro", "jpro");
+        return new DriverDataSource(
+                getClass().getClassLoader(),
+                "org.h2.Driver",
+                "jdbc:h2:~/flywaydemodb-inmemory",
+                "jpro",
+                "jpro"
+        );
     }
 
     @Before
