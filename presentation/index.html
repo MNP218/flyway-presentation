@@ -44,14 +44,61 @@
 			<div class="slides">
 				<section>
 					<h1>Flyway</h1>
-					<h3>Database Migrations Made Easy</h3>
+					<h3>Databasemigreringer på den enkle måten</h3>
 					<p>
-						<small>Av <a href="http://rystad.no/frode">Frode Rystad</a> / <a href="http://twitter.com/froderystad">@froderystad</a></small>
+						<small>Av Frode Rystad / <a href="http://twitter.com/froderystad">@froderystad</a></small>
 					</p>
 				</section>
 				<section>
+					<section>
+						<h3>Hva er databasemigreringer?</h3>
+					</section>
+					<section>
+						<h3>Kildekodekontroll - DET har vi!</h3>
+						<ul>
+							<li>Git forteller oss nøyaktig hvilke endringer som er hvor.</li>
+							<li>Maven og Nexus gir oss reproduserbare bygg.</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Hva med databasen?</h3>
+						<p>
+						<ul>
+							<li>Hvilken tilstand er databasen i på <em>denne</em> maskinen?</li>
+							<li>Har skriptet allerede blitt kjørt, eller ikke?</li>
+							<li>Har quick-fiksen vi gjorde i produksjon blitt kjørt inn i testmiljøet?</li>
+							<li>Hvordan setter vi opp en ny database-instans?</li>
+						</ul>
+						</p>
+						<p>Ofte er svaret: <em>Vi vet ikke</em></p>
+					</section>
+					<section>
+						<h3>Databasemigreringer <em>to the rescue</em></h3>
+						<ul>
+							<li>Lett å opprette database fra <em>scratch</em></li>
+							<li>Gir kontroll på databaseskjemaets tilstand</li>
+							<li>Deterministisk migrering fra én databasetilstand til neste</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Hvorfor Flyway?</h3>
+					</section>
+					<section>
+						<h3>Hva er alternativet?</h3>
+						<p><strong>Liquibase</strong></p>
+						<ul>
+							<li>Metaspråk gir støtte for flere databaser</li>
+						</ul>
+						<aside class="notes">
+							Støtter kun ett databaseskjema.
+						</aside>
+					</section>
+				</section>
+				<section>
 					<h1>Demo</h1>
-					<p>A simple social network domain model, inspired by <a href="http://www.quora.com/How-does-Facebook-maintain-a-list-of-friends-for-each-user-Does-it-maintain-a-separate-table-for-each-user">a reply on Quora</a>.</p>
+					<p>Test-drevet databaseutvikling med JPA og Flyway.</p>
 				</section>
 
 			</div>
