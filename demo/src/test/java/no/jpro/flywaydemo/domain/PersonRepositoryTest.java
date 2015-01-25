@@ -1,6 +1,7 @@
 package no.jpro.flywaydemo.domain;
 
 import no.jpro.flywaydemo.AbstractJpaTest;
+import no.jpro.flywaydemo.infrastructure.CompanyJpaRepository;
 import no.jpro.flywaydemo.infrastructure.PersonJpaRepository;
 import org.junit.Test;
 
@@ -11,10 +12,10 @@ public class PersonRepositoryTest extends AbstractJpaTest {
     public void save_whenNewEntity_createsId() {
         PersonRepository repository = new PersonJpaRepository(entityManager());
         Person johnDoe = new Person("John", "Doe");
-        assertThat(johnDoe.getId()).isNull();
+        assertThat(johnDoe.id()).isNull();
 
         repository.save(johnDoe);
-        assertThat(johnDoe.getId()).isNotNull();
+        assertThat(johnDoe.id()).isNotNull();
     }
 
     @Test
@@ -24,25 +25,26 @@ public class PersonRepositoryTest extends AbstractJpaTest {
         repository.save(johnDoe);
 
         Person savedPerson = repository.personByName("John", "Doe");
-        assertThat(savedPerson.getId()).isEqualTo(johnDoe.getId());
+        assertThat(savedPerson.id()).isEqualTo(johnDoe.id());
+        assertThat(savedPerson.firstName()).isEqualTo("John");
+        assertThat(savedPerson.lastName()).isEqualTo("Doe");
     }
 
     @Test
-    public void friendship_whenEstablished_isPersistedCorrectly() {
-        PersonRepository repository = new PersonJpaRepository(entityManager());
+    public void company_mapsCorrectly() {
+        CompanyRepository companyRepository = new CompanyJpaRepository(entityManager());
+        Company jPro = new Company("jPro");
+        companyRepository.save(jPro);
+
+        PersonRepository personRepository = new PersonJpaRepository(entityManager());
         Person johnDoe = new Person("John", "Doe");
-        repository.save(johnDoe);
+        johnDoe.setCompany(jPro);
+        personRepository.save(johnDoe);
 
-        Person olaNordmann = new Person("Ola", "Nordmann");
-        olaNordmann.addFriend(johnDoe);
-        repository.save(olaNordmann);
+        clearCache();
 
-        repository.clearCache();
-        Person savedOla = repository.personByName("Ola", "Nordmann");
-        assertThat(savedOla.getFriendships().size()).isEqualTo(1);
-        Friendship olasFriendship = savedOla.getFriendships().iterator().next();
-        assertThat(olasFriendship.getPerson1().getId()).isEqualTo(olaNordmann.getId());
-        assertThat(olasFriendship.getPerson2().getId()).isEqualTo(johnDoe.getId());
+        Person personFromDb = personRepository.personByName("John", "Doe");
+        assertThat(personFromDb.company()).isNotNull();
     }
 
 }

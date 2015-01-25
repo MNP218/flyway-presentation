@@ -1,19 +1,18 @@
 CREATE SEQUENCE personSeq;
-CREATE SEQUENCE friendshipSeq;
+CREATE SEQUENCE companySeq;
 
 CREATE TABLE person
 (
-  id        BIGINT DEFAULT personSeq.nextval PRIMARY KEY,
-  firstName VARCHAR,
-  lastName  VARCHAR,
-  gender    VARCHAR
+  id         BIGINT DEFAULT personSeq.nextval PRIMARY KEY,
+  company_id BIGINT,
+  firstName  VARCHAR,
+  lastName   VARCHAR,
+  gender     VARCHAR
 );
 
-CREATE TABLE friendship
+CREATE TABLE company
 (
-  id              BIGINT DEFAULT friendshipSeq.nextval PRIMARY KEY,
-  person1_id         BIGINT NOT NULL,
-  person2_id         BIGINT NOT NULL,
-  dateEstablished DATETIME
+  id   BIGINT DEFAULT companySeq.nextval PRIMARY KEY,
+  name VARCHAR NOT NULL
 );
 

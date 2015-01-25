@@ -50,4 +50,9 @@ public class AbstractJpaTest {
         entityManager().close();
         entityManager = null;
     }
+
+    protected void clearCache() {
+        entityManager.flush();
+        entityManager.clear();
+    }
 }
