@@ -5,8 +5,7 @@ import no.jpro.flywaydemo.infrastructure.CompanyJpaRepository;
 import no.jpro.flywaydemo.infrastructure.PersonJpaRepository;
 import org.junit.Test;
 
-import java.util.Arrays;
-
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CompanyRepositoryTest extends AbstractJpaTest {
@@ -37,28 +36,28 @@ public class CompanyRepositoryTest extends AbstractJpaTest {
         Company jPro = new Company("jPro");
         companyRepository.save(jPro);
 
-        Person frodeR = new Person("Frode", "Rystad");
-        Person rune = new Person("Rune", "Steinseth");
+        Person frode = new Person("Frode", "Rystad");
+        Person john = new Person("John", "Doe");
 
         PersonRepository personRepository = new PersonJpaRepository(entityManager());
-        personRepository.save(frodeR);
-        personRepository.save(rune);
+        personRepository.save(frode);
+        personRepository.save(john);
 
-        jPro.addEmployee(frodeR);
-        jPro.addEmployee(rune);
+        jPro.addEmployee(frode);
+        jPro.addEmployee(john);
         companyRepository.save(jPro);
 
         clearCache();
 
         Company companyFromDb = companyRepository.companyByName("jPro");
-        assertThat(companyFromDb.employees()).containsAll(Arrays.asList(frodeR, rune));
+        assertThat(companyFromDb.employees()).containsAll(asList(frode, john));
 
-        companyFromDb.removeEmployee(frodeR);
+        companyFromDb.removeEmployee(john);
         companyRepository.save(companyFromDb);
 
         clearCache();
 
         companyFromDb = companyRepository.companyByName("jPro");
-        assertThat(companyFromDb.employees()).containsAll(Arrays.asList(rune));
+        assertThat(companyFromDb.employees()).containsAll(asList(frode));
     }
 }
