@@ -11,6 +11,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import static no.jpro.flywaydemo.domain.Gender.Male;
+
 public class DemoApplication {
     private final EntityManager entityManager;
     private final PersonRepository personRepository;
@@ -26,8 +28,8 @@ public class DemoApplication {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        Person frode = personRepository.save(new Person("Frode", "Rystad"));
-        Person john = personRepository.save(new Person("John", "Doe"));
+        Person frode = personRepository.save(new Person("Frode", "Rystad", Male));
+        Person john = personRepository.save(new Person("John", "Doe", Male));
 
         Company jPro = new Company("jPro");
         jPro.addEmployee(frode);

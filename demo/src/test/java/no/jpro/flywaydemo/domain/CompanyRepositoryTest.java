@@ -6,6 +6,8 @@ import no.jpro.flywaydemo.infrastructure.PersonJpaRepository;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
+import static no.jpro.flywaydemo.domain.Gender.Female;
+import static no.jpro.flywaydemo.domain.Gender.Male;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CompanyRepositoryTest extends AbstractJpaTest {
@@ -36,8 +38,8 @@ public class CompanyRepositoryTest extends AbstractJpaTest {
         Company jPro = new Company("jPro");
         companyRepository.save(jPro);
 
-        Person frode = new Person("Frode", "Rystad");
-        Person john = new Person("John", "Doe");
+        Person frode = new Person("Frode", "Rystad", Male);
+        Person john = new Person("Jane", "Doe", Female);
 
         PersonRepository personRepository = new PersonJpaRepository(entityManager());
         personRepository.save(frode);

@@ -1,0 +1,1 @@
+ALTER TABLE person ADD gender VARCHAR DEFAULT 'Male' NOT NULL;

@@ -1,11 +1,6 @@
 package no.jpro.flywaydemo.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 @Entity
 public class Person {
@@ -15,13 +10,16 @@ public class Person {
     private Long id;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @ManyToOne
     private Company company;
 
-    public Person(String firstName, String lastName) {
+    public Person(String firstName, String lastName, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
     }
 
     public Person() {
@@ -37,6 +35,10 @@ public class Person {
 
     public Long id() {
         return id;
+    }
+
+    public Gender gender() {
+        return gender;
     }
 
     public void setCompany(Company company) {
