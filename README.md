@@ -6,8 +6,6 @@ Just open the project file `./presentation/index.html`. The presentation is in N
 
 The presentation was written using [Reveal.js](https://github.com/hakimel/reveal.js/) from [Hakim El Hattab](http://hakim.se).
 
-A mind map with notes is also available, `./presentation/flyway-presentation-notes.mm`, in [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page) format.
-
 ## Demo
 The functional and technical aspects of the demo is explained in the presentation.
 
