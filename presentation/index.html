@@ -65,21 +65,24 @@
 						<h3>Hva med databasen?</h3>
 						<p>
 						<ul>
-							<li>Hvilken tilstand er databasen i på <em>denne</em> maskinen?</li>
-							<li>Har et skript allerede blitt kjørt, eller ikke?</li>
-							<li>Har quick-fiksen vi gjorde i produksjon blitt kjørt inn i testmiljøet?</li>
-							<li>Hvordan setter vi opp en ny database-instans?</li>
+							<li class="fragment">Hvilken tilstand er databasen i på <em>denne</em> maskinen?</li>
+							<li class="fragment">Har et skript allerede blitt kjørt, eller ikke?</li>
+							<li class="fragment">Har quick-fiksen vi gjorde i produksjon blitt kjørt inn i testmiljøet?</li>
+							<li class="fragment">Hvordan setter vi opp en ny database-instans?</li>
 						</ul>
 						</p>
-						<p>Ofte er svaret: <em>Vi vet ikke</em></p>
+						<p class="fragment">Ofte er svaret: <em>Vi vet ikke</em></p>
 					</section>
 					<section>
 						<h3>Databasemigreringer <em>to the rescue</em></h3>
 						<ul>
-							<li>Versjoneres med kildekoden</li>
-							<li>Får kontroll på databaseskjemaets tilstand</li>
-							<li>Deterministisk migrering fra én databasetilstand til neste</li>
-							<li>Lett å opprette database <em>fra scratch</em></li>
+							<li class="fragment">Deterministisk migrering fra én databasetilstand til neste</li>
+							<li class="fragment">Får kontroll på databaseskjemaets tilstand</li>
+							<li class="fragment">Lett å opprette database <em>fra scratch</em></li>
+							<li class="fragment">Versjoneres med kildekoden</li>
+							<li class="fragment">Kan jobbe på flere branches</li>
+							<li class="fragment">Muliggjør Continous Delivery</li>
+							<li class="fragment">Kan tas i bruk nå, uansett hvor du er i prosjektet ditt!</li>
 						</ul>
 						<aside class="notes">
 							Det er vanlig med én kildefil per migrering, og checksum-kontroll
@@ -91,14 +94,19 @@
 					<section>
 						<h3>Hvorfor Flyway?</h3>
 						<ul>
-							<li>Enkelt verktøy, som gjør sine ting bra.</li>
-							<li>Kan brukes fra kommandolinje, Java-API, Maven, m.m.</li>
-							<li>Migreringer er ren SQL, eller Java-kode.</li>
-							<li>Det virket første gang, og har fortsatt å virke siden.</li>
+							<li class="fragment">Enkelt verktøy, som gjør sine ting bra.</li>
+							<li class="fragment">Kan brukes fra kommandolinje, Java-API, Maven, m.m.</li>
+							<li class="fragment">Migreringer er ren SQL, eller Java-kode.</li>
+							<li class="fragment">Det virket for oss første gang, og har fortsatt å virke siden.</li>
 						</ul>
 						<p><a href="http://flywaydb.org">flywaydb.org</a></p>
 						<aside class="notes">
-							Vi bruker bare PostgreSQL, så støtte for én databasedialekt var tilstrekkelig.
+							<ul>
+								<li>Kommandolinje: Driftssetter med RPM, som migrerer selv.</li>
+								<li>Java-API: Applikasjon og tester sjekker migreringsstatus selv.</li>
+								<li>Java-migrering: Kontrollerer Perl-basert datainnlasting.</li>
+								<li>Vi bruker bare PostgreSQL, så støtte for én databasedialekt var tilstrekkelig.</li>
+							</ul>
 						</aside>
 					</section>
 					<section>
@@ -110,6 +118,8 @@
 							<li>Kan generere <em>diff</em> som SQL</li>
 							<li>Kan generere dokumentasjon</li>
 							<li>Støtte for forskjellige grunndatasett i f.eks. test og prod</li>
+							<li>Rollback</li>
+							<li>Refactoring</li>
 						</ul>
 						<aside class="notes">
 							<p>SQL-diff kan være nyttig der driftsorganisasjoner ikke vil kjøre Liquibase, men et skript e.l.</p>
@@ -117,7 +127,7 @@
 								<ul>
 									<li>Støtter kun ett databaseskjema, og vi hadde <em>to</em>.</li>
 									<li>Problematisk med våre eksisterende skjemas <em>funksjoner</em>.</li>
-									<li>Brukes hos Skatteetaten</li>
+									<li>Brukes hos Skatteetaten, som er fornøyde.</li>
 								</ul>
 							</p>
 						</aside>
@@ -126,10 +136,10 @@
 				<section>
 					<h3>Anbefalte praksiser for FLYWAY</h3>
 					<ul>
-						<li>Aldri endre på en pushet migrering</li>
-						<li>Én kildekodefil per funksjon per revisjon</li>
-						<li>Bruk tidsstempel som versjonsnummer - det fungerer best i større team, og over flere branches.</li>
-						<li>Versjoner grunndata sammen med databaseskjemaet.</li>
+						<li class="fragment">Aldri endre på en pushet migrering</li>
+						<li class="fragment">Bruk tidsstempel som versjonsnummer - det fungerer best i større team, og over flere branches.</li>
+						<li class="fragment">Versjoner grunndata sammen med databaseskjemaet.</li>
+						<li class="fragment">Én kildekodefil per funksjon per revisjon</li>
 					</ul>
 				</section>
 				<section>
@@ -140,6 +150,7 @@
 					<section>
 						<h3>Funksjonalitet</h3>
 						<p>Enkel domenemodell: Company - Person(s)</p>
+						<p><img src="images/demo1.png"/></p>
 					</section>
 					<section>
 						<h3>Teknisk</h3>
@@ -150,6 +161,13 @@
 							<li>Kjører i Java</li>
 						</ul>
 					</section>
+				</section>
+				<section>
+					<img src="http://h1bwiki.com/wp-content/uploads/2012/12/questions.jpg"/>
+				</section>
+				<section>
+					<h2>Takk for meg!</h2>
+					<p><a href="http://www.flywaydb.org">flywaydb.org</a></p>
 				</section>
 			</div>
 
