@@ -1,8 +1,8 @@
 # Flyway-presentation
-Presentation of [Flyway](http://flywaydb.org), with code examples.
+Introduction to [Flyway](http://flywaydb.org), with code examples.
 
 ## Presentation
-Just open the project file `./presentation/index.html`. The presentation is in Norwegian, as it was held during a company-internal event at [JProfessionals](http://www.jpro.no), where I work.
+To view the presentation, open the project file `./presentation/index.html`. To enable more advanced features, like speaker notes, run the presentation using `grunt serve` (requires Node and Grunt). The presentation is in Norwegian, as it was held during a company-internal event at [JProfessionals](http://www.jpro.no), where I work.
 
 The presentation was written using [Reveal.js](https://github.com/hakimel/reveal.js/) from [Hakim El Hattab](http://hakim.se).
 

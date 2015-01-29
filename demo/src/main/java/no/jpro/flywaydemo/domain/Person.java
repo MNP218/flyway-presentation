@@ -8,7 +8,9 @@ public class Person {
     @SequenceGenerator(name = "personSeq", sequenceName = "personSeq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeq")
     private Long id;
+
     private String firstName;
+
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -25,6 +27,10 @@ public class Person {
     public Person() {
     }
 
+    public Long id() {
+        return id;
+    }
+
     public String firstName() {
         return firstName;
     }
@@ -33,8 +39,8 @@ public class Person {
         return lastName;
     }
 
-    public Long id() {
-        return id;
+    public Company company() {
+        return company;
     }
 
     public Gender gender() {
@@ -45,10 +51,6 @@ public class Person {
         this.company = company;
     }
 
-    public Company company() {
-        return company;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -56,9 +58,8 @@ public class Person {
 
         Person person = (Person) o;
 
-        if (id != null ? !id.equals(person.id) : person.id != null) return false;
+        return !(id != null ? !id.equals(person.id) : person.id != null);
 
-        return true;
     }
 
     @Override

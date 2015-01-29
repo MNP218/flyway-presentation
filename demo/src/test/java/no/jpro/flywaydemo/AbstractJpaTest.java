@@ -13,12 +13,21 @@ public class AbstractJpaTest {
     private static EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    private EntityManagerFactory entityManagerFactory() {
-        if (entityManagerFactory == null) {
-            initFlyway();
-            entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo.test");
-        }
-        return entityManagerFactory;
+    @Before
+    public void startTransaction() {
+        entityManager().getTransaction().begin();
+    }
+
+    protected void clearCache() {
+        entityManager.flush();
+        entityManager.clear();
+    }
+
+    @After
+    public void rollbackTransaction() {
+        entityManager().getTransaction().rollback();
+        entityManager().close();
+        entityManager = null;
     }
 
     protected EntityManager entityManager() {
@@ -26,6 +35,14 @@ public class AbstractJpaTest {
             entityManager = entityManagerFactory().createEntityManager();
         }
         return entityManager;
+    }
+
+    private EntityManagerFactory entityManagerFactory() {
+        if (entityManagerFactory == null) {
+            initFlyway();
+            entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo.inmemory");
+        }
+        return entityManagerFactory;
     }
 
     private void initFlyway() {
@@ -43,22 +60,5 @@ public class AbstractJpaTest {
                 "jpro",
                 "jpro"
         );
-    }
-
-    @Before
-    public void startTransaction() {
-        entityManager().getTransaction().begin();
-    }
-
-    @After
-    public void rollbackTransaction() {
-        entityManager().getTransaction().rollback();
-        entityManager().close();
-        entityManager = null;
-    }
-
-    protected void clearCache() {
-        entityManager.flush();
-        entityManager.clear();
     }
 }

@@ -1,6 +1,7 @@
 package no.jpro.flywaydemo;
 
 import no.jpro.flywaydemo.domain.Company;
+import no.jpro.flywaydemo.domain.CompanyRepository;
 import no.jpro.flywaydemo.domain.Person;
 import no.jpro.flywaydemo.domain.PersonRepository;
 import no.jpro.flywaydemo.infrastructure.CompanyJpaRepository;
@@ -16,12 +17,12 @@ import static no.jpro.flywaydemo.domain.Gender.Male;
 public class DemoApplication {
     private final EntityManager entityManager;
     private final PersonRepository personRepository;
-    private final CompanyJpaRepository companyJpaRepository;
+    private final CompanyRepository companyRepository;
 
     public DemoApplication(EntityManager entityManager) {
         this.entityManager = entityManager;
         this.personRepository = new PersonJpaRepository(entityManager);
-        this.companyJpaRepository = new CompanyJpaRepository(entityManager);
+        this.companyRepository = new CompanyJpaRepository(entityManager);
     }
 
     public void run() {
@@ -35,7 +36,7 @@ public class DemoApplication {
         jPro.addEmployee(frode);
         jPro.addEmployee(john);
 
-        companyJpaRepository.save(jPro);
+        companyRepository.save(jPro);
 
         transaction.commit();
         entityManager.getEntityManagerFactory().close();
@@ -46,7 +47,7 @@ public class DemoApplication {
     }
 
     private static EntityManager entityManager() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo.standalone");
         return entityManagerFactory.createEntityManager();
     }
 }
