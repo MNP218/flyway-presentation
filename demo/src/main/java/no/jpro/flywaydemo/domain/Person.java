@@ -1,11 +1,6 @@
 package no.jpro.flywaydemo.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 @Entity
 public class Person {
@@ -13,7 +8,9 @@ public class Person {
     @SequenceGenerator(name = "personSeq", sequenceName = "personSeq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "personSeq")
     private Long id;
+
     private String firstName;
+
     private String lastName;
 
     @ManyToOne
@@ -27,6 +24,10 @@ public class Person {
     public Person() {
     }
 
+    public Long id() {
+        return id;
+    }
+
     public String firstName() {
         return firstName;
     }
@@ -35,16 +36,12 @@ public class Person {
         return lastName;
     }
 
-    public Long id() {
-        return id;
+    public Company company() {
+        return company;
     }
 
     public void setCompany(Company company) {
         this.company = company;
-    }
-
-    public Company company() {
-        return company;
     }
 
     @Override
@@ -54,9 +51,8 @@ public class Person {
 
         Person person = (Person) o;
 
-        if (id != null ? !id.equals(person.id) : person.id != null) return false;
+        return !(id != null ? !id.equals(person.id) : person.id != null);
 
-        return true;
     }
 
     @Override

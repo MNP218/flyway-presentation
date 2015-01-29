@@ -1,8 +1,8 @@
 package no.jpro.flywaydemo;
 
 import no.jpro.flywaydemo.domain.Company;
-import no.jpro.flywaydemo.domain.Person;
 import no.jpro.flywaydemo.domain.CompanyRepository;
+import no.jpro.flywaydemo.domain.Person;
 import no.jpro.flywaydemo.domain.PersonRepository;
 import no.jpro.flywaydemo.infrastructure.CompanyJpaRepository;
 import no.jpro.flywaydemo.infrastructure.PersonJpaRepository;
@@ -45,7 +45,7 @@ public class DemoApplication {
     }
 
     private static EntityManager entityManager() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("no.jpro.flywaydemo.standalone");
         return entityManagerFactory.createEntityManager();
     }
 }
