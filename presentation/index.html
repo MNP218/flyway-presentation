@@ -109,42 +109,10 @@
 							</ul>
 						</aside>
 					</section>
-					<section>
-						<h3>Hva er alternativet?</h3>
-						<p><strong><p><a href="http://www.liquibase.org">Liquibase</a></p></strong></p>
-						<ul>
-							<li>Støtte for flere databaser fra samme definisjon</li>
-							<li>Støtter XML, YAML, JSON og SQL som definisjonsspråk</li>
-							<li>Kan generere <em>diff</em> som SQL</li>
-							<li>Kan generere dokumentasjon</li>
-							<li>Støtte for forskjellige grunndatasett i f.eks. test og prod</li>
-							<li>Rollback</li>
-							<li>Refactoring</li>
-						</ul>
-						<aside class="notes">
-							<p>SQL-diff kan være nyttig der driftsorganisasjoner ikke vil kjøre Liquibase, men et skript e.l.</p>
-							<p>Liquibase
-								<ul>
-									<li>Støtter kun ett databaseskjema, og vi hadde <em>to</em>.</li>
-									<li>Problematisk med våre eksisterende skjemas <em>funksjoner</em>.</li>
-									<li>Brukes hos Skatteetaten, som er fornøyde.</li>
-								</ul>
-							</p>
-						</aside>
-					</section>
-				</section>
-				<section>
-					<h3>Anbefalte praksiser for FLYWAY</h3>
-					<ul>
-						<li class="fragment">Aldri endre på en pushet migrering</li>
-						<li class="fragment">Bruk tidsstempel som versjonsnummer - det fungerer best i større team, og over flere branches.</li>
-						<li class="fragment">Versjoner grunndata sammen med databaseskjemaet.</li>
-						<li class="fragment">Én kildekodefil per funksjon per revisjon</li>
-					</ul>
 				</section>
 				<section>
 					<section>
-						<h1>Demo</h1>
+						<h2>Demo</h2>
 						<p>Test-drevet databaseutvikling med JPA og Flyway.</p>
 					</section>
 					<section>
@@ -163,11 +131,44 @@
 					</section>
 				</section>
 				<section>
+					<h3>Hva er alternativet?</h3>
+					<p><strong><p><a href="http://www.liquibase.org">Liquibase</a></p></strong></p>
+					<ul>
+						<li>Støtte for flere databaser fra samme definisjon</li>
+						<li>Støtter XML, YAML, JSON og SQL som definisjonsspråk</li>
+						<li>Kan generere <em>diff</em> som SQL</li>
+						<li>Kan generere dokumentasjon</li>
+						<li>Støtte for forskjellige grunndatasett i f.eks. test og prod</li>
+						<li>Rollback</li>
+						<li>Refactoring</li>
+					</ul>
+					<aside class="notes">
+						<p>SQL-diff kan være nyttig der driftsorganisasjoner ikke vil kjøre Liquibase, men et skript e.l.</p>
+						<p>Liquibase
+							<ul>
+								<li>Støtter kun ett databaseskjema, og vi hadde <em>to</em>.</li>
+								<li>Problematisk med våre eksisterende skjemas <em>funksjoner</em>.</li>
+								<li>Brukes hos Skatteetaten, som er fornøyde.</li>
+							</ul>
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h3>Anbefalte praksiser for FLYWAY</h3>
+					<ul>
+						<li class="fragment">Aldri endre på en pushet migrering</li>
+						<li class="fragment">Bruk tidsstempel som versjonsnummer - det fungerer best i større team, og over flere branches.</li>
+						<li class="fragment">Versjoner grunndata sammen med databaseskjemaet.</li>
+						<li class="fragment">Én kildekodefil per funksjon per revisjon</li>
+					</ul>
+				</section>
+				<section>
 					<img src="http://h1bwiki.com/wp-content/uploads/2012/12/questions.jpg"/>
 				</section>
 				<section>
 					<h2>Takk for meg!</h2>
 					<p><a href="http://www.flywaydb.org">flywaydb.org</a></p>
+					<p><a href="https://github.com/froderystad/flyway-presentation">github.com/froderystad/flyway-presentation</a></p>
 				</section>
 			</div>
 
